@@ -1,3 +1,14 @@
+<?php
+require_once '../classes/Enseignant.php';
+require_once '../classes/Administrateur.php';
+
+if(!($_SESSION['role']==="admin")){
+    header("location: ../public/login.php");
+}
+$teacher=new Enseignant();
+$teachers=$teacher->showallEnseignants();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -110,37 +121,49 @@
                 </div>
             </header>
 
-            <!-- Main Content Area -->
+            
             <main class="p-6">
-                <!-- Section 1: Validation des comptes enseignants -->
                 <div class="mb-12">
                     <h2 class="text-2xl font-bold mb-6">Validation des Comptes Enseignants</h2>
                     <div class="bg-white rounded-lg shadow overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nom</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date de demande</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">Thomas Martin</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">thomas@example.com</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">20 Mars 2024</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <button class="text-green-600 hover:text-green-800 mr-2" title="Valider">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-800" title="Refuser">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <form action="teacher.validation.php" method="POST">
+     <table class="min-w-full divide-y divide-gray-200">
+        <thead>
+            <tr>
+                <th class="px-6 py-4 text-left">Name</th>
+                <th class="px-6 py-4 text-left">Email</th>
+                <th class="px-6 py-4 text-left">Date</th>
+                <th class="px-6 py-4 text-left">Actif</th>
+                <th class="px-6 py-4 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+    <?php foreach ($teachers as $index => $teacher) { ?>
+    <tr class="hover:bg-gray-50">
+        <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($teacher['nom']); ?></td>
+        <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($teacher['user_email']); ?></td>
+        <td class="px-6 py-4 whitespace-nowrap">
+            <?php echo date('Y-m-d', strtotime($teacher['date_creation'])); ?>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($teacher['actif']); ?></td>
+        <td class="px-6 py-4 whitespace-nowrap">
+            <form action="teacher.validation.php" method="POST">
+                <input type="hidden" name="teacherID" value="<?php echo htmlspecialchars($teacher['user_id']); ?>">
+                <button type="submit" name="check" value="approve" class="text-green-600 hover:text-green-800 mr-2">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button type="submit" name="check" value="reject" class="text-red-600 hover:text-red-800">
+                    <i class="fas fa-times"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    <?php } ?>
+</tbody>
+    </table>
+</form>
+
+
                     </div>
                 </div>
 

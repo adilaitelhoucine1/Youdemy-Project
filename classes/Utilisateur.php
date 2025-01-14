@@ -25,10 +25,7 @@ class Utilisateur {
         }
 
         $user = $stmt->fetch();
-if($user){
-    echo"chi hajaa";
-}
-        if (!password_verify($password, $user['user_password'])) {
+       if (!password_verify($password, $user['user_password'])) {
             return false; 
         }
 

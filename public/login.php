@@ -1,6 +1,8 @@
 <?php
 require_once '../classes/Utilisateur.php';
 
+
+
 if (isset($_POST['login-btn'])) {
     $user = new Utilisateur();
     $email =$_POST['email'];
@@ -12,7 +14,7 @@ if (isset($_POST['login-btn'])) {
     }else if($_SESSION['role']==="Enseignant"){
         header("location: ../teachers/dashbaord.php");
     }else if($_SESSION['role']==="admin"){
-        header("location: ../admin/dashbaord.php");
+        header("location: ../admin/dashboard.php");
     }
   
 }

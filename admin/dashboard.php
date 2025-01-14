@@ -1,3 +1,12 @@
+<?php
+require_once '../classes/Enseignant.php';
+require_once '../classes/Administrateur.php';
+
+if(!($_SESSION['role']==="admin")){
+    header("location: ../public/login.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
