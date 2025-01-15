@@ -14,6 +14,30 @@ class Utilisateur {
         $connect = new Connect();
         $this->conn = $connect->getConnection();
     }
+    public function getUserId() {
+        return $this->user_id;
+    }
+
+    public function getUserEmail() {
+        return $this->user_email;
+    }
+
+    public function getNom() {
+        return $this->nom;
+    }
+
+   
+    public function setUserEmail($email) {
+        $this->user_email = $email;
+    }
+
+    public function setPassword($password) {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function setNom($nom) {
+        $this->nom = $nom;
+    }
 
     public function connexion($email, $password) {
         $query = "SELECT * FROM utilisateur WHERE user_email = ? ";
@@ -73,29 +97,5 @@ class Utilisateur {
     }
 
     
-    public function getUserId() {
-        return $this->user_id;
-    }
-
-    public function getUserEmail() {
-        return $this->user_email;
-    }
-
-    public function getNom() {
-        return $this->nom;
-    }
-
-   
-    public function setUserEmail($email) {
-        $this->user_email = $email;
-    }
-
-    public function setPassword($password) {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-    }
-
-    public function setNom($nom) {
-        $this->nom = $nom;
-    }
 
 }

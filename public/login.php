@@ -12,7 +12,7 @@ if (isset($_POST['login-btn'])) {
     if ($_SESSION['role']==="Étudiant"){
         header("location: ../students/index.php");  
     }else if($_SESSION['role']==="Enseignant"){
-        header("location: ../teachers/dashbaord.php");
+        header("location: ../teachers/dashboard.php");
     }else if($_SESSION['role']==="admin"){
         header("location: ../admin/dashboard.php");
     }
