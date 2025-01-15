@@ -35,7 +35,7 @@
                             <i class="fas fa-folder w-6 text-gray-500"></i>
                             <span class="mx-4 font-medium">Categories</span>
                         </a>
-                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+                        <a href="Tags.php" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200">
                             <i class="fas fa-tags w-6 text-gray-500"></i>
                             <span class="mx-4 font-medium">Tags</span>
                         </a>
