@@ -49,8 +49,9 @@ class Utilisateur {
         }
 
         $user = $stmt->fetch();
-       if (!password_verify($password, $user['user_password'])) {
-            return false; 
+        if (!password_verify($password, $user['user_password'])) {
+            echo "Mot de passe incorrect.";
+            exit; 
         }
 
         $_SESSION['user_id'] = $user['user_id'];

@@ -1,6 +1,16 @@
 <?php
 require_once '../classes/Enseignant.php';
 require_once '../classes/Administrateur.php';
+require_once '../classes/Categorie.php';
+require_once '../classes/Tags.php';
+
+
+$category=new Categorie();
+$tag=new Tags();
+
+
+$categories=$category->afficherCategorie();
+$tags=$tag->afficher_tag();
 
 ?>
 
@@ -64,7 +74,7 @@ require_once '../classes/Administrateur.php';
                     <h2 class="text-2xl font-bold text-gray-800">Bienvenue <span class="text-2xl font-bold text-gray-800"><?php echo  $_SESSION['nom'];?></span></h2>
                    
                     <div class="flex items-center space-x-4">
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                        <button  onclick="openModal()"  class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
                             Ajouter un cours
                         </button>
                         <div class="relative">
@@ -236,5 +246,143 @@ require_once '../classes/Administrateur.php';
             </div>
         </main>
     </div>
+
+    <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 w-full max-w-4xl">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-xl shadow-lg">
+                <!-- En-tête avec bouton fermer -->
+                <div class="flex items-center justify-between p-4 border-b">
+                    <h3 class="text-xl font-semibold text-gray-900">Ajouter un Cours</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6">
+                    <form id="courseForm" action="addcourse.php" method="POST" class="space-y-4">
+                       
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700">Titre</label>
+                            <input type="text" id="title" name="title" 
+                                class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                            <textarea id="description" name="description" rows="4" 
+                                class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+
+                       
+                        <div>
+                            <label for="category" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                            <select id="category" name="category" 
+                                class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Sélectionner une catégorie</option>
+                                <?php foreach($categories as $category) {?>
+                                <option value="<?php echo  $category['id_category']; ?>"><?php echo $category['name']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        
+                        <div>
+                            <span class="block text-sm font-medium text-gray-700 mb-2">Tags</span>
+                            <div class="space-x-4">
+                            <?php foreach($tags as $tag) {?>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="tags[]" value="<?php echo $tag['id_tag']; ?>" class="rounded border-gray-300 text-blue-600">
+                                    <span class="ml-2 text-sm"><?php echo $tag['name']; ?></span>
+                                </label>
+                             <?php } ?>  
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contentType" class="block text-sm font-medium text-gray-700">Type de Contenu</label>
+                            <select id="contentType" name="contentType" onchange="toggleContentFields()" 
+                                class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Choisir un type</option>
+                                <option value="text">Texte</option>
+                                <option value="video">Vidéo</option>
+                            </select>
+                        </div>
+
+                  
+                        <div id="textContent" class="hidden">
+                            <label for="content" class="block text-sm font-medium text-gray-700">Contenu Textuel</label>
+                            <textarea id="content" name="content" rows="4" 
+                                class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+
+                       
+                        <div id="videoContent" class="hidden">
+                            <label for="videoUrl" class="block text-sm font-medium text-gray-700">URL de la Vidéo</label>
+                            <input type="url" id="videoUrl" name="videoUrl" 
+                                class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="px-6 py-4 bg-gray-50 rounded-b-xl flex justify-end space-x-3">
+                            <button onclick="closeModal()" 
+                                class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Annuler
+                            </button>
+                            <button onclick="submitForm()" type ="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function toggleContentFields() {
+            const contentType = document.getElementById('contentType').value;
+            const textContent = document.getElementById('textContent');
+            const videoContent = document.getElementById('videoContent');
+
+            textContent.classList.add('hidden');
+            videoContent.classList.add('hidden');
+
+            if (contentType === 'text') {
+                textContent.classList.remove('hidden');
+            } else if (contentType === 'video') {
+                videoContent.classList.remove('hidden');
+            }
+        }
+
+        
+
+   
+        document.getElementById('modal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>

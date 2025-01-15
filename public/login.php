@@ -9,13 +9,22 @@ if (isset($_POST['login-btn'])) {
     $password = $_POST['password'];
 
     $user->connexion($email, $password);
-    if ($_SESSION['role']==="Étudiant"){
-        header("location: ../students/index.php");  
-    }else if($_SESSION['role']==="Enseignant"){
+
+
+    if ($_SESSION['role'] === "Étudiant") {
+        header("location: ../students/index.php");
+        exit;
+    } else if ($_SESSION['role'] === "Enseignant") {
         header("location: ../teachers/dashboard.php");
-    }else if($_SESSION['role']==="admin"){
+        exit;
+    } else if ($_SESSION['role'] === "admin") {
         header("location: ../admin/dashboard.php");
+        exit;
+    } else {
+        echo "Rôle non reconnu : " . $_SESSION['role'];
+        exit;
     }
+    
   
 }
 ?>
