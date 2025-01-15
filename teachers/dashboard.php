@@ -5,6 +5,11 @@ require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 
 
+$Enseignant=new Enseignant();
+
+if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
+    header("location: Eror404.php");
+}
 $category=new Categorie();
 $tag=new Tags();
 

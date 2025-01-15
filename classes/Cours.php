@@ -1,12 +1,13 @@
 <?php
-class Cours {
-    private $cours_id;
-    private $titre;
-    private $description;
-    private $enseignant_id;
-    private $category;
-    private $gratuit;
+require_once '../config/Connect.php';
 
-    public function calculer_cours() {}
-    public function afficher_cours() {}
+ class Cours {
+    
+    
+    public function __construct() {
+        $connect = new Connect();
+        $this->conn = $connect->getConnection();
+    }
+    
+     public function ajouter($titre, $description, $enseignant_id, $id_category, $contenu, $tags){}
 } 

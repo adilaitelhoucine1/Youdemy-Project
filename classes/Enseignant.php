@@ -7,12 +7,24 @@ class Enseignant extends Utilisateur {
         $connect = new Connect();
         $this->conn = $connect->getConnection();
     }
-    
+    public function addEnseignant($Enseignant_id) {
+        $query = "INSERT INTO enseignant (enseignant_id ) VALUES (?)";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$Enseignant_id]);
+        
+    }
     public function showallEnseignants() {
         $sql = "SELECT * FROM utilisateur where role = 'Enseignant'";
         $stmt =  $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+    public function CheckActifEnseignant($Enseignant_id) {
+        $sql = "SELECT actif FROM utilisateur where user_id = ?";
+        $stmt =  $this->conn->prepare($sql);
+        $stmt->execute([$Enseignant_id]);
+        $result =$stmt->fetch();
+        return $result['actif'];
     }
     
 } 
