@@ -8,6 +8,9 @@ if(!($_SESSION['role']==="admin")){
 $teacher=new Enseignant();
 $teachers=$teacher->showallEnseignants();
 
+$user=new Utilisateur();
+$users=$user->showallUssers();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -138,14 +141,21 @@ $teachers=$teacher->showallEnseignants();
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-    <?php foreach ($teachers as $index => $teacher) { ?>
+    <?php foreach ($teachers as $teacher) { ?>
     <tr class="hover:bg-gray-50">
         <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($teacher['nom']); ?></td>
         <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($teacher['user_email']); ?></td>
         <td class="px-6 py-4 whitespace-nowrap">
             <?php echo date('Y-m-d', strtotime($teacher['date_creation'])); ?>
         </td>
-        <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($teacher['actif']); ?></td>
+        <td class="px-6 py-4 whitespace-nowrap"><?php
+        
+        if($teacher['actif']==0){
+            echo "Inactif";
+        }else{
+            echo "Actif";
+        }
+         ?></td>
         <td class="px-6 py-4 whitespace-nowrap">
             <form action="teacher.validation.php" method="POST">
                 <input type="hidden" name="teacherID" value="<?php echo htmlspecialchars($teacher['user_id']); ?>">
@@ -167,11 +177,11 @@ $teachers=$teacher->showallEnseignants();
                     </div>
                 </div>
 
-                <!-- Section 2: Gestion des utilisateurs -->
+               
                 <div>
                     <h2 class="text-2xl font-bold mb-6">Gestion des Utilisateurs</h2>
                     
-                    <!-- Filtres -->
+                   
                     <div class="mb-6 flex flex-wrap gap-4">
                         <select class="border rounded-lg px-3 py-2">
                             <option value="">Tous les rôles</option>
@@ -186,48 +196,54 @@ $teachers=$teacher->showallEnseignants();
                         </select>
                     </div>
 
-                    <!-- Tableau des utilisateurs avec select pour les actions -->
+             
                     <div class="bg-white rounded-lg shadow overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nom</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rôle</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">Marie Dubois</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">marie@example.com</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Étudiant
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Actif
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <form class="flex items-center gap-2">
-                                            <select class="border rounded-lg px-2 py-1 text-sm">
-                                                <option value="">Choisir une action</option>
-                                                <option value="activate">Activer</option>
-                                                <option value="suspend">Suspendre</option>
-                                                <option value="delete">Supprimer</option>
-                                            </select>
-                                            <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-700">
-                                                Appliquer
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+        <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rôle</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+    <?php foreach ($users as $user) { ?>
+        <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($user['nom']); ?></td>
+            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($user['user_email']); ?></td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <?php echo htmlspecialchars($user['role']); ?>
+                </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-blue-800">
+                <?php echo htmlspecialchars($user['status']); ?>
+                </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                
+                <form action="users.management.php" method="POST">
+                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>">
+                    <select name="status" class="border rounded-lg px-2 py-1 text-sm">
+                        <option value="">Choisir une action</option>
+                        <option value="Active">Activer</option>
+                        <option value="Suspendu">Suspendre</option>
+                        <option value="supprimé">Supprimer</option>
+                    </select>
+                    <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-700">
+                        Appliquer
+                    </button>
+                </form>
+            </td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+
+                              
                     </div>
                 </div>
             </main>
@@ -237,7 +253,7 @@ $teachers=$teacher->showallEnseignants();
     <!-- Overlay -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden lg:hidden"></div>
 
-    <!-- Même script JavaScript que dans dashboard.php -->
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');

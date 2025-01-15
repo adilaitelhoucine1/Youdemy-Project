@@ -57,6 +57,13 @@ class Utilisateur {
         return true; 
     }
 
+    public function showallUssers() {
+        $sql = "SELECT * FROM utilisateur where role <> 'admin'";
+        $stmt =  $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function emailExiste($email) {
         $query = "SELECT COUNT(*) FROM utilisateur WHERE user_email = ?";
         $stmt = $this->conn->prepare($query);
