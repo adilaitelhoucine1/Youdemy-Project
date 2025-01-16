@@ -1,6 +1,12 @@
 <?php
 require_once '../classes/Enseignant.php';
 require_once '../classes/Administrateur.php';
+require_once '../classes/Cours.php';
+require_once '../classes/Categorie.php';
+$cours = new Cours();
+$user = new Utilisateur();
+$Enseignant = new Enseignant();
+$Categorie = new Categorie();
 
 if(!($_SESSION['role']==="admin")){
     header("location: ../public/login.php");
@@ -89,7 +95,7 @@ if(!($_SESSION['role']==="admin")){
                             <div class="ml-4">
                                 <h3 class="text-gray-500 text-sm font-medium">Total des Cours</h3>
                                 <div class="flex items-center space-x-1">
-                                    <p class="text-2xl font-bold text-gray-800">125</p>
+                                    <p class="text-2xl font-bold text-gray-800"><?php echo $cours->getCountCourses();  ?></p>
                                     <span class="text-green-500 text-sm">
                                         <i class="fas fa-arrow-up"></i>
                                         12%
@@ -109,7 +115,7 @@ if(!($_SESSION['role']==="admin")){
                             <div class="ml-4">
                                 <h3 class="text-gray-500 text-sm font-medium">Étudiants Actifs</h3>
                                 <div class="flex items-center space-x-1">
-                                    <p class="text-2xl font-bold text-gray-800">1,245</p>
+                                    <p class="text-2xl font-bold text-gray-800"><?php echo $user->getCountUsers();  ?></p>
                                     <span class="text-green-500 text-sm">
                                         <i class="fas fa-arrow-up"></i>
                                         8%
@@ -127,7 +133,7 @@ if(!($_SESSION['role']==="admin")){
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-gray-500 text-sm font-medium">Enseignants</h3>
-                                <p class="text-2xl font-bold text-gray-800">45</p>
+                                <p class="text-2xl font-bold text-gray-800"><?php echo $Enseignant->getCountEnseignant();  ?></p>
                             </div>
                         </div>
                     </div>
@@ -141,7 +147,7 @@ if(!($_SESSION['role']==="admin")){
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-gray-500 text-sm font-medium">Catégories</h3>
-                                <p class="text-2xl font-bold text-gray-800">8</p>
+                                <p class="text-2xl font-bold text-gray-800"><?php echo $Categorie->getCountCategorie();  ?></p>
                             </div>
                         </div>
                     </div>
@@ -204,14 +210,13 @@ if(!($_SESSION['role']==="admin")){
                                 </span>
                             </div>
                         </div>
-                        <!-- Répéter pour les 2 autres enseignants -->
+                        
                     </div>
                 </div>
             </main>
         </div>
     </div>
 
-    <!-- Ajout d'un overlay pour le mobile -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden lg:hidden"></div>
 
     <script>
@@ -220,23 +225,23 @@ if(!($_SESSION['role']==="admin")){
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
 
-            // Fonction pour ouvrir le menu
+    
             function openMenu() {
                 sidebar.classList.remove('translate-x-[-100%]');
                 sidebar.classList.add('translate-x-0');
                 overlay.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Empêche le défilement
+                document.body.style.overflow = 'hidden'; 
             }
 
-            // Fonction pour fermer le menu
+           
             function closeMenu() {
                 sidebar.classList.remove('translate-x-0');
                 sidebar.classList.add('translate-x-[-100%]');
                 overlay.classList.add('hidden');
-                document.body.style.overflow = ''; // Réactive le défilement
+                document.body.style.overflow = ''; 
             }
 
-            // Toggle menu on button click
+         
             mobileMenuButton.addEventListener('click', function(e) {
                 e.stopPropagation();
                 if (sidebar.classList.contains('translate-x-[-100%]')) {
@@ -246,19 +251,18 @@ if(!($_SESSION['role']==="admin")){
                 }
             });
 
-            // Fermer le menu quand on clique sur l'overlay
+
             overlay.addEventListener('click', closeMenu);
 
-            // Fermer le menu quand on clique sur un lien
+ 
             const sidebarLinks = sidebar.querySelectorAll('a');
             sidebarLinks.forEach(link => {
                 link.addEventListener('click', closeMenu);
             });
 
-            // Gérer le redimensionnement de la fenêtre
+       
             window.addEventListener('resize', function() {
-                if (window.innerWidth >= 1024) { // 1024px est le breakpoint lg de Tailwind
-                    closeMenu();
+                if (window.innerWidth >= 1024) {
                     sidebar.classList.remove('translate-x-[-100%]');
                     document.body.style.overflow = '';
                 } else {

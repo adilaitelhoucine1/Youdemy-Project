@@ -27,6 +27,14 @@ class Enseignant extends Utilisateur {
         return $result['actif'];
     }
     
+
+    public function getCountEnseignant(){
+        $sql="SELECT COUNT(*) as 'count' from utilisateur where role = 'Enseignant'";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute();
+        $result=$stmt->fetch();
+        return $result['count'];
+    }
 } 
 
 

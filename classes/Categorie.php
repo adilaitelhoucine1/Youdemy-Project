@@ -29,4 +29,12 @@ class Categorie {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getCountCategorie(){
+        $sql="SELECT COUNT(*) as 'count' from categorie";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute();
+        $result=$stmt->fetch();
+        return $result['count'];
+    }
 } 

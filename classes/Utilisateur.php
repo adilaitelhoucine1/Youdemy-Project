@@ -98,6 +98,12 @@ class Utilisateur {
         return $stmt->fetchColumn() > 0; 
     }
 
-    
+    public function getCountUsers(){
+        $sql="SELECT COUNT(*) as 'count' from utilisateur where role <> 'admin' and status <> 'Suspendu'";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute();
+        $result=$stmt->fetch();
+        return $result['count'];
+    }
 
 }
