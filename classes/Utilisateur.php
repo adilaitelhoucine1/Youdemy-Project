@@ -66,6 +66,7 @@ class Utilisateur {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         if($role === 'Enseignant') {
             $actif=0;
+            
         } else if($role === 'Étudiant') {
          $actif=1;
         }

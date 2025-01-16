@@ -16,8 +16,8 @@ if (isset($_POST['login-btn'])) {
         header("location: ../students/index.php");
         exit;
     } else if ($_SESSION['role'] === "Enseignant") {
-        $Enseignant= new Enseignant();
-        $Enseignant->addEnseignant($_SESSION['user_id']);
+        // $Enseignant= new Enseignant();
+        // $Enseignant->addEnseignant($_SESSION['user_id']);
         header("location: ../teachers/dashboard.php");
         exit;
     } else if ($_SESSION['role'] === "admin") {
