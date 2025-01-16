@@ -10,6 +10,7 @@
         }
         
         public function afficher($enseignant_id){}
+        public function Ajouter($titre, $description, $enseignant_id, $id_category, $contenu, $tags){}
         
 
         protected function getTags($course_id) {
@@ -143,6 +144,14 @@
             $result=$stmt->fetch();
             return $result['count'];
         }
+        public function getAllCourses() {
+            $sql = "SELECT * FROM cours c JOIN utilisateur u on c.enseignant_id=u.user_id 
+            join categorie  cat on cat.id_category=c.id_category";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
     } 
-    //  $cours = new Cours();
-    //  echo $cours->getCountCourses();
+    //   $cours = new Cours();
+    //   print_r( $cours->getAllCourses());
