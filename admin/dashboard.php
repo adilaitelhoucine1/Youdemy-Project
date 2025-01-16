@@ -271,7 +271,7 @@ if(!($_SESSION['role']==="admin")){
             });
         });
 
-        // Graphique d'Evolution
+       
         const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
         new Chart(enrollmentCtx, {
             type: 'line',
@@ -318,7 +318,7 @@ if(!($_SESSION['role']==="admin")){
             }
         });
 
-        // Graphique Circulaire
+        
         const categoryCtx = document.getElementById('categoryPieChart').getContext('2d');
         new Chart(categoryCtx, {
             type: 'doughnut',
