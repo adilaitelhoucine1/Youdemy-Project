@@ -22,5 +22,5 @@ if($contentType === 'text') {
    $CoursVideo = new CoursVideo();
    $CoursVideo->ajouter($title,$description,$enseignant_id,$category,$videoUrl,$tags);
 }
-
+header("location: dashboard.php");
 ?>

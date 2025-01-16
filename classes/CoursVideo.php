@@ -26,7 +26,21 @@ class CoursVideo extends Cours {
     }
 
 
-    public function afficher() {
-
+    public function afficher($enseignant_id) {
+        $sql = "SELECT c.*, cat.name as category_name 
+                FROM cours c 
+                LEFT JOIN categorie cat ON c.id_category = cat.id_category 
+                WHERE c.enseignant_id = ? AND c.content_video IS NOT NULL";
+                
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$enseignant_id]);
+        $courses = $stmt->fetchAll();
+        
+      
+        foreach ($courses as &$course) {
+            $course['tags'] = $this->getTags($course['course_id']);
+        }
+        
+        return $courses;
     }
 } 
