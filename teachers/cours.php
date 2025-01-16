@@ -57,9 +57,9 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
                         <i class="fas fa-chart-line"></i>
                         <span>Statistiques</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-cog"></i>
-                        <span>Paramètres</span>
+                    <a href="../public/deonnexion.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-log-out"></i>
+                        <span>Déconnexion</span>
                     </a>
                 </nav>
             </div>
@@ -120,9 +120,15 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
                     </div>
                 </td>
                 <td class="py-4 px-4">
-                    <button class="text-blue-600 hover:text-blue-800 mr-3">
+
+                <form action="updateCourse.php" method="POST" class="inline">
+                        <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
+                        <!-- <input type="hidden" name="type" value="video"> -->
+                        <button type="submit" class="text-blue-600 hover:text-blue-800 mr-3">
                         <i class="fas fa-edit"></i>
-                    </button>
+                        </button>
+                </form>
+
                     <form action="deletecourse.php" method="POST" class="inline">
                         <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
                         <input type="hidden" name="type" value="video">
@@ -156,9 +162,14 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
                     </div>
                 </td>
                 <td class="py-4 px-4">
-                    <button class="text-blue-600 hover:text-blue-800 mr-3">
+                <form action="updateCourse.php" method="POST" class="inline">
+                        <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
+                     <input type="hidden" name="type" value="video">
+                        <button type="submit" class="text-blue-600 hover:text-blue-800 mr-3">
                         <i class="fas fa-edit"></i>
-                    </button>
+                        </button>
+                </form>
+                    
                     <form action="deletecourse.php" method="POST" class="inline">
                         <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
                         <input type="hidden" name="type" value="text">
@@ -309,6 +320,8 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
         </div>
     </div>
 
+
+    
     <script>
         const descriptionField = document.getElementById('description');
         const charCount = document.getElementById('charCount');

@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal - Ajouter un Cours</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen bg-gray-100 p-8">
-    <!-- Bouton pour ouvrir le modal -->
-    <button onclick="openModal()" 
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-        Ouvrir le formulaire
-    </button>
 
-    <!-- Modal -->
     <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
         <div class="relative top-20 mx-auto p-5 w-full max-w-4xl">
             <!-- Modal content -->
@@ -164,5 +149,3 @@
             }
         });
     </script>
-</body>
-</html>
