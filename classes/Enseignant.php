@@ -36,6 +36,16 @@ class Enseignant extends Utilisateur {
         $result=$stmt->fetch();
         return $result['count'];
     }
+
+    public function getEnseignantById($cours_id){
+        $sql="SELECT nom FROM utilisateur u join cours c 
+        on u.user_id = c.enseignant_id where c.enseignant_id = ?";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute([$cours_id]);
+        $result= $stmt->fetch();
+        return $result['nom'];
+
+    }
 } 
 
 

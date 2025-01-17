@@ -63,17 +63,14 @@ $AllCourses=$cours->getAllCourses();
                         <i class="fas fa-home"></i>
                         <span>Tableau de bord</span>
                     </a>
-                    <a href="mes-cours.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
+                    <a href="Mycourses.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-book"></i>
                         <span>Mes cours</span>
                     </a>
-                    <a href="favoris.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-heart"></i>
-                        <span>Favoris</span>
-                    </a>
-                    <a href="profil.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-user"></i>
-                        <span>Mon profil</span>
+                
+                    <a href="../public/deonnexion.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Déconnexion</span>
                     </a>
                 </nav>
             </div>
@@ -128,7 +125,7 @@ $AllCourses=$cours->getAllCourses();
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold mb-6">Mes cours récents</h2>
+                    <h2 class="text-xl font-semibold mb-6">Les cours disponibles</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <?php  foreach($AllCourses as $course){ ?>
                         <div class="border rounded-lg overflow-hidden card-hover">

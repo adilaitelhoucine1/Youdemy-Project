@@ -14,12 +14,13 @@ $type=$cours->GettypeCourse($course_id);
 $contentText=$cours->getContent($course_id);
 
 $url=$cours->getVideoUrl($course_id);
-echo $type;
-echo "<br>";
-echo $url;
-echo "<br>";
-print_r($details);
+// echo $type;
+// echo "<br>";
+// echo $url;
+// echo "<br>";
+ print_r($details);
 foreach($details as $cours){
+    $course_id=$cours['course_id'];
     $title=$cours['titre'];
     $description=$cours['description'];
     $enseignant=$cours['nom'];
@@ -79,14 +80,11 @@ foreach($details as $cours){
                         <i class="fas fa-home"></i>
                         <span>Tableau de bord</span>
                     </a>
-                    <a href="mes-cours.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
+                    <a href="Mycourses.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-book"></i>
                         <span>Mes cours</span>
                     </a>
-                    <a href="favoris.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-heart"></i>
-                        <span>Favoris</span>
-                    </a>
+             
                     <a href="../public/deonnexion.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Déconnexion</span>
@@ -115,8 +113,24 @@ foreach($details as $cours){
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
                     <div class="relative">
                         <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                            <h1 class="text-4xl font-bold text-white"><?php echo $title ?></h1>
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80 flex flex-col items-center justify-center">
+                            <h1 class="text-4xl font-bold text-white mb-6"><?php echo $title ?></h1>
+                            
+                            <div class="flex space-x-4">
+                                <form action="AddToCourse.php" method="POST">
+
+                                    <button type="submit" class="group relative px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-500 rounded-xl 
+                                            hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] transition-all duration-300">
+                                        <span class="relative flex items-center text-white">
+                                            <i class="fas fa-plus-circle text-lg mr-2 group-hover:rotate-90 transition-transform duration-300"></i>
+                                            <span class="font-semibold">Ajouter à Mes cours</span>
+                                        </span>
+                                        <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                                    </button>
+
+                                </form>
+
+                            </div>
                         </div>
                     </div>
 
