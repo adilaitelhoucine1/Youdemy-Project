@@ -9,7 +9,14 @@
             $this->conn = $connect->getConnection();
         }
         
-        public function afficher($enseignant_id){}
+        public function afficher($enseignant_id){
+            $sql="SELECT * FROM cours c join categorie cat ON c.id_category=cat.id_category
+            join utilisateur u on u.user_id=c.enseignant_id
+             WHERE c.course_id= ? ";
+            $stmt=$this->conn->prepare($sql);
+            $stmt->execute([$enseignant_id]);
+            return  $stmt->fetchAll();
+        }
         public function Ajouter($titre, $description, $enseignant_id, $id_category, $contenu, $tags){}
         
 
@@ -153,5 +160,5 @@
         }
 
     } 
-    //   $cours = new Cours();
-    //   print_r( $cours->getAllCourses());
+    //    $cours = new Cours();
+    //    print_r( $cours->afficher(16));

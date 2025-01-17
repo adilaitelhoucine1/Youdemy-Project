@@ -1,3 +1,16 @@
+<?php
+
+require_once '../classes/Enseignant.php';
+require_once '../classes/Administrateur.php';
+require_once '../classes/Categorie.php';
+require_once '../classes/Tags.php';
+require_once '../classes/Cours.php';
+
+$cours= new Cours();
+$AllCourses=$cours->getAllCourses();
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -118,11 +131,10 @@
                 </div>
             </div>
         </div>
-    </nav>
+</nav>
 
     <div class="navbar-spacing"></div>
 
-    <!-- En-tête de la page avec motif -->
     <div class="hero-pattern">
         <div class="max-w-7xl mx-auto py-16 px-4">
             <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
@@ -134,7 +146,6 @@
         </div>
     </div>
 
-    <!-- Filtres et Recherche -->
     <div class="max-w-7xl mx-auto -mt-8 px-4">
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
@@ -180,11 +191,10 @@
     <!-- Liste des cours -->
     <div class="max-w-7xl mx-auto px-4 pb-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Carte de cours -->
-            <?php for($i = 1; $i <= 9; $i++): ?>
+            <?php foreach($AllCourses as $course) {?>
             <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
                 <div class="relative">
-                    <img src="https://via.placeholder.com/400x200" alt="Course" class="w-full h-48 object-cover">
+                    <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-48 object-cover">
                     <div class="absolute top-4 right-4">
                         <button class="p-2 bg-white rounded-full shadow-md hover:text-indigo-600 transition-colors">
                             <i class="far fa-heart"></i>
@@ -200,20 +210,19 @@
                             Débutant
                         </span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Introduction au développement web</h3>
+                    <h3 class="text-xl font-semibold mb-2"><?php echo $course['titre']; ?></h3>
                     <p class="text-gray-600 mb-4 line-clamp-2">
-                        Apprenez les bases du développement web moderne avec HTML, CSS et JavaScript.
-                    </p>
+                    <?php echo $course['description']; ?></p>
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center">
-                            <img src="https://via.placeholder.com/40" alt="Instructor" class="w-10 h-10 rounded-full border-2 border-indigo-600">
+                            <img src="../assets/images/professeur.png" alt="Instructor" class="w-10 h-10 rounded-full border-2 border-indigo-600">
                             <div class="ml-3">
-                                <span class="block text-sm font-medium text-gray-900">John Doe</span>
+                                <span class="block text-sm font-medium text-gray-900 capitalize"><?php echo $course['nom']; ?></span>
                                 <span class="block text-xs text-gray-500">Expert Web</span>
                             </div>
                         </div>
                         <div class="text-right">
-                            <span class="block text-lg font-bold gradient-text">49.99 €</span>
+                            <span class="block text-lg font-bold gradient-text">Free</span>
                             <div class="flex items-center text-yellow-400 text-sm">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -224,7 +233,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="course-details.php?id=1" 
+                    <a href="course-details.php?id=<?php echo $course['course_id']; ?>" 
                         class="gradient-border block card-hover">
                         <div class="px-6 py-2 text-center text-indigo-600">
                             Voir le cours
@@ -232,7 +241,7 @@
                     </a>
                 </div>
             </div>
-            <?php endfor; ?>
+            <?php }; ?>
         </div>
 
         <!-- Pagination -->

@@ -1,3 +1,16 @@
+<?php
+
+require_once '../classes/Enseignant.php';
+require_once '../classes/Administrateur.php';
+require_once '../classes/Categorie.php';
+require_once '../classes/Tags.php';
+require_once '../classes/Cours.php';
+
+$Categorie= new Categorie();
+$AllCategories=$Categorie->afficherCategorie();
+// print_r($AllCategories);
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -60,7 +73,6 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 nav-blur">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-20">
@@ -131,7 +143,6 @@
 
     <div class="navbar-spacing"></div>
 
-    <!-- En-tête de la page -->
     <div class="hero-pattern">
         <div class="max-w-7xl mx-auto py-16 px-4">
             <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
@@ -143,143 +154,34 @@
         </div>
     </div>
 
-    <!-- Grille des catégories principales -->
     <div class="max-w-7xl mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Développement Web -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover category-card">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <?php foreach($AllCategories as $cat) { ?>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden card-hover category-card">
                 <div class="p-8">
-                    <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-code text-3xl text-indigo-600 category-icon"></i>
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-4xl text-indigo-600 category-icon transform hover:scale-110 transition-transform duration-300"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Développement Web</h3>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800 hover:text-indigo-600 transition-colors duration-300">
+                        <?php echo $cat['name'] ?>
+                    </h3>
                     <p class="text-gray-600 mb-4">
-                        HTML, CSS, JavaScript, React, Vue.js et plus encore.
+                        Explorez notre sélection de cours disponibles.
                     </p>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">42 cours disponibles</span>
-                        <a href="cours.php?category=web" class="text-indigo-600 hover:text-indigo-700 font-medium">
+                        
+                        <a href="cours.php" class="text-indigo-600 hover:text-indigo-700 font-medium transition-colors duration-300">
                             Explorer <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Développement Mobile -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover category-card">
-                <div class="p-8">
-                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-mobile-alt text-3xl text-blue-600 category-icon"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Développement Mobile</h3>
-                    <p class="text-gray-600 mb-4">
-                        iOS, Android, React Native, Flutter et plus encore.
-                    </p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">28 cours disponibles</span>
-                        <a href="cours.php?category=mobile" class="text-blue-600 hover:text-blue-700 font-medium">
-                            Explorer <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Design -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover category-card">
-                <div class="p-8">
-                    <div class="w-16 h-16 bg-pink-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-paint-brush text-3xl text-pink-600 category-icon"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Design</h3>
-                    <p class="text-gray-600 mb-4">
-                        UI/UX, Figma, Adobe XD, Photoshop et plus encore.
-                    </p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">35 cours disponibles</span>
-                        <a href="cours.php?category=design" class="text-pink-600 hover:text-pink-700 font-medium">
-                            Explorer <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Data Science -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover category-card">
-                <div class="p-8">
-                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-chart-bar text-3xl text-purple-600 category-icon"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Data Science</h3>
-                    <p class="text-gray-600 mb-4">
-                        Python, R, Machine Learning, IA et plus encore.
-                    </p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">31 cours disponibles</span>
-                        <a href="cours.php?category=data" class="text-purple-600 hover:text-purple-700 font-medium">
-                            Explorer <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Marketing Digital -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover category-card">
-                <div class="p-8">
-                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-bullhorn text-3xl text-green-600 category-icon"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Marketing Digital</h3>
-                    <p class="text-gray-600 mb-4">
-                        SEO, Réseaux sociaux, Email marketing et plus encore.
-                    </p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">25 cours disponibles</span>
-                        <a href="cours.php?category=marketing" class="text-green-600 hover:text-green-700 font-medium">
-                            Explorer <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Business -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover category-card">
-                <div class="p-8">
-                    <div class="w-16 h-16 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-briefcase text-3xl text-yellow-600 category-icon"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Business</h3>
-                    <p class="text-gray-600 mb-4">
-                        Entrepreneuriat, Management, Finance et plus encore.
-                    </p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">38 cours disponibles</span>
-                        <a href="cours.php?category=business" class="text-yellow-600 hover:text-yellow-700 font-medium">
-                            Explorer <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
     </div>
+</div>
 
-    <!-- Section des statistiques -->
-    <div class="bg-indigo-50 py-16 mt-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold text-indigo-600 mb-2">200+</div>
-                    <div class="text-gray-600">Cours disponibles</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-indigo-600 mb-2">50+</div>
-                    <div class="text-gray-600">Instructeurs experts</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-indigo-600 mb-2">10k+</div>
-                    <div class="text-gray-600">Étudiants satisfaits</div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+            
+            
 </body>
 </html> 

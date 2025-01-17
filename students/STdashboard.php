@@ -89,12 +89,10 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="../public/login.php" class="px-6 py-2 text-gray-700 hover:text-indigo-600 transition-colors">
-                        Connexion
-                    </a>
-                    <a href="../public/register.php" class="gradient-border inline-block card-hover">
+
+                    <a href="../public/deonnexion.php" class="gradient-border inline-block card-hover">
                         <div class="px-6 py-2 text-indigo-600">
-                            Inscription
+                            Déconnexion
                         </div>
                     </a>
                 </div>

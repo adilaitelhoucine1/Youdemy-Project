@@ -13,7 +13,7 @@ if (isset($_POST['login-btn'])) {
 
 
     if ($_SESSION['role'] === "Étudiant") {
-        header("location: ../students/index.php");
+        header("location: ../students/dashboard.php");
         exit;
     } else if ($_SESSION['role'] === "Enseignant") {
         // $Enseignant= new Enseignant();
