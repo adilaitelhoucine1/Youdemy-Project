@@ -1,6 +1,7 @@
 <?php
 require_once '../config/Connect.php';
 require_once 'Utilisateur.php';
+require_once 'Enrollment.php';
 
 class Enseignant extends Utilisateur {
     public function __construct() {
@@ -45,6 +46,14 @@ class Enseignant extends Utilisateur {
         $result= $stmt->fetch();
         return $result['nom'];
 
+    }
+    public function getMySuscriptions($Enseignant_id){
+    $sql ="SELECT * FROM enrollment en JOIN cours c on en.id_cours=c.course_id
+     JOIN utilisateur u on u.user_id=en.id_etudiant
+      where c.enseignant_id = ?";
+      $stmt=$this->conn->prepare($sql);
+      $stmt->execute([$Enseignant_id]);
+      return $stmt->fetchAll();
     }
 } 
 

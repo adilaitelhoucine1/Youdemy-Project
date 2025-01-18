@@ -130,24 +130,24 @@
             }
         }
 
-        public function getCountCourses(){
-            $sql="SELECT COUNT(*) as 'count' from cours";
+        public function getCountCourses($enseignant_id){
+            $sql="SELECT COUNT(*) as 'count' from cours where enseignant_id = ?";
             $stmt=$this->conn->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$enseignant_id]);
             $result=$stmt->fetch();
             return $result['count'];
         }
-        public function getCountCoursVideo(){
-            $sql="SELECT COUNT(*) as 'count' from cours where content_video is not null";
+        public function getCountCoursVideo($enseignant_id){
+            $sql="SELECT COUNT(*) as 'count' from cours where content_video is not null and enseignant_id = ?";
             $stmt=$this->conn->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$enseignant_id]);
             $result=$stmt->fetch();
             return $result['count'];
         }
-        public function getCountCoursText(){
-            $sql="SELECT COUNT(*) as 'count' from cours where content_Text is not null";
+        public function getCountCoursText($enseignant_id){
+            $sql="SELECT COUNT(*) as 'count' from cours where content_Text is not null and enseignant_id = ?";
             $stmt=$this->conn->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$enseignant_id]);
             $result=$stmt->fetch();
             return $result['count'];
         }

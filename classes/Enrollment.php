@@ -42,6 +42,7 @@ class Enrollment {
     $stmt=$this->conn->prepare($sql);
     $stmt->execute([$user_id,$course_id]);
     }
+    
   
 }
 

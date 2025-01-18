@@ -4,6 +4,7 @@ require_once '../classes/Administrateur.php';
 require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
+$enseignant_id=$_SESSION['user_id'];
 $cours = new Cours();
 ?>
 <!DOCTYPE html>
@@ -46,7 +47,7 @@ $cours = new Cours();
                         <i class="fas fa-graduation-cap"></i>
                         <span>Mes Cours</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
+                    <a href="subscriptions.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-users"></i>
                         <span>Étudiants</span>
                     </a>
@@ -64,7 +65,6 @@ $cours = new Cours();
 
       
         <main class="flex-1 ml-64 p-8">
-            <!-- Header -->
             <header class="bg-white rounded-xl shadow-sm p-6 mb-8">
                 <div class="flex justify-between items-center">
                     <div>
@@ -75,13 +75,13 @@ $cours = new Cours();
                 </div>
             </header>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols- md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
              
                 <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-gray-500 text-sm">Total des cours</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCourses();  ?></h3>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCourses($enseignant_id);  ?></h3>
                           
                             <p class="text-green-500 text-sm flex items-center">
                                 <i class="fas fa-arrow-up mr-1"></i>
@@ -99,7 +99,7 @@ $cours = new Cours();
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-gray-500 text-sm">Cours Vidéo</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCoursVideo();  ?></h3>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCoursVideo($enseignant_id);  ?></h3>
                             <p class="text-green-500 text-sm flex items-center">
                                 <i class="fas fa-arrow-up mr-1"></i>
                                 <span>8% ce mois</span>
@@ -116,7 +116,7 @@ $cours = new Cours();
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-gray-500 text-sm">Cours Texte</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCoursText();  ?></h3>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCoursText($enseignant_id);  ?></h3>
                             <p class="text-green-500 text-sm flex items-center">
                                 <i class="fas fa-arrow-up mr-1"></i>
                                 <span>5% ce mois</span>
@@ -129,21 +129,6 @@ $cours = new Cours();
                 </div>
 
                
-                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-gray-500 text-sm">Étudiants</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mb-2">156</h3>
-                            <p class="text-green-500 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i>
-                                <span>15% ce mois</span>
-                            </p>
-                        </div>
-                        <div class="bg-yellow-100 p-3 rounded-lg">
-                            <i class="fas fa-users text-yellow-600 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">

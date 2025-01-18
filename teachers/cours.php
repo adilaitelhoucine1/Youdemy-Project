@@ -49,7 +49,7 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
                         <i class="fas fa-graduation-cap"></i>
                         <span>Mes Cours</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
+                    <a href="subscriptions.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-users"></i>
                         <span>Étudiants</span>
                     </a>
