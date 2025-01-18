@@ -20,7 +20,7 @@ $AllCourses=$cours->getAllCourses();
     <title>Gestion des Tags - Youdemy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -34,6 +34,18 @@ $AllCourses=$cours->getAllCourses();
             }
         }
     </script>
+
+<style>
+          body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #0EA5E9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Mobile Menu Button -->
@@ -84,7 +96,7 @@ $AllCourses=$cours->getAllCourses();
         <tr class="border-b hover:bg-gray-50">
             <td class="py-4 px-4">
                  
-            <p class="text-blue-500 mr-3 font-bold"><?php echo $course['titre']; ?></p>
+            <p class="text-black mr-3 "><?php echo $course['titre']; ?></p>
    
             </td>
             <td class="py-4 px-4">

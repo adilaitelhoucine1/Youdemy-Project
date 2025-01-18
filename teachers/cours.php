@@ -29,16 +29,31 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de Bord Enseignant</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+          body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #0EA5E9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 <body>
     <div class="min-h-screen bg-gray-50 flex">
      
     <aside class="w-64 bg-white shadow-lg fixed h-full">
             <div class="p-6">
-                <div class="flex items-center justify-center mb-8">
-                    <h1 class="text-2xl font-bold gradient-text">Youdemy</h1>
+            <div class="flex items-center justify-center mb-8">
+                    <div class="gradient-border">
+                        <div class="w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-2xl gradient-text"></i>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text ml-3">Youdemy</span>
                 </div>
                 <nav class="space-y-4">
                     <a href="dashboard.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
@@ -58,7 +73,7 @@ if($Enseignant->CheckActifEnseignant($_SESSION['user_id'])==0){
                         <span>Statistiques</span>
                     </a>
                     <a href="../public/deonnexion.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-log-out"></i>
+                    <i class="fas fa-sign-out-alt"></i>
                         <span>Déconnexion</span>
                     </a>
                 </nav>

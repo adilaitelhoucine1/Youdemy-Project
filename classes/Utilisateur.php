@@ -84,7 +84,7 @@ class Utilisateur {
     }
 
     public function showallUssers() {
-        $sql = "SELECT * FROM utilisateur where role <> 'admin'";
+        $sql = "SELECT * FROM utilisateur where role not in ('admin', 'Enseignant')";
         $stmt =  $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();

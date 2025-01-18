@@ -30,8 +30,12 @@ class Administrateur extends Utilisateur {
         $stmtdelete->execute([$user_id]);
     }
   
-    public function gererUtilisateur() {}
-    public function gererStatistiquesGlobales() {}
-    public function gererTags() {}
-    public function gererCategories() {}
+    public function getCountCourses(){
+        $sql="SELECT COUNT(*) as 'count' from cours";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute();
+        $result=$stmt->fetch();
+        return $result['count'];
+    }
+
 } 

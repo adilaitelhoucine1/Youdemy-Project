@@ -33,6 +33,18 @@ $users=$user->showallUssers();
             }
         }
     </script>
+
+<style>
+          body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #0EA5E9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Mobile Menu Button -->
@@ -133,26 +145,12 @@ $users=$user->showallUssers();
                     <h2 class="text-2xl font-bold mb-6">Gestion des Utilisateurs</h2>
                     
                    
-                    <div class="mb-6 flex flex-wrap gap-4">
-                        <select class="border rounded-lg px-3 py-2">
-                            <option value="">Tous les rôles</option>
-                            <option value="student">Étudiants</option>
-                            <option value="teacher">Enseignants</option>
-                        </select>
-
-                        <select class="border rounded-lg px-3 py-2">
-                            <option value="">Tous les statuts</option>
-                            <option value="active">Actif</option>
-                            <option value="suspended">Suspendu</option>
-                        </select>
-                    </div>
-
              
                     <div class="bg-white rounded-lg shadow overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
         <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nom Complet</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rôle</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>

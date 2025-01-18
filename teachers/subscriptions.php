@@ -33,8 +33,13 @@ $Subscriptions=$Enseignant->getMySuscriptions($enseignant_id);
     <div class="flex">
         <aside class="w-64 bg-white shadow-lg fixed h-full">
             <div class="p-6">
-                <div class="flex items-center justify-center mb-8">
-                    <h1 class="text-2xl font-bold gradient-text">Youdemy</h1>
+            <div class="flex items-center justify-center mb-8">
+                    <div class="gradient-border">
+                        <div class="w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-2xl gradient-text"></i>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text ml-3">Youdemy</span>
                 </div>
                 <nav class="space-y-4">
                     <a href="dashboard.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">

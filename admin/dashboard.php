@@ -4,6 +4,7 @@ require_once '../classes/Administrateur.php';
 require_once '../classes/Cours.php';
 require_once '../classes/Categorie.php';
 $cours = new Cours();
+$Administrateur = new Administrateur();
 $user = new Utilisateur();
 $Enseignant = new Enseignant();
 $Categorie = new Categorie();
@@ -36,6 +37,17 @@ if(!($_SESSION['role']==="admin")){
             }
         }
     </script>
+        <style>
+          body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #0EA5E9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     
@@ -95,7 +107,7 @@ if(!($_SESSION['role']==="admin")){
                             <div class="ml-4">
                                 <h3 class="text-gray-500 text-sm font-medium">Total des Cours</h3>
                                 <div class="flex items-center space-x-1">
-                                    <p class="text-2xl font-bold text-gray-800"><?php echo $cours->getCountCourses();  ?></p>
+                                    <p class="text-2xl font-bold text-gray-800"><?php echo $Administrateur->getCountCourses();  ?></p>
                                     <span class="text-green-500 text-sm">
                                         <i class="fas fa-arrow-up"></i>
                                         12%

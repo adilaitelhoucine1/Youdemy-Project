@@ -196,7 +196,7 @@ $AllCourses=$cours->getAllCourses();
                 <div class="relative">
                     <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-48 object-cover">
                     <div class="absolute top-4 right-4">
-                        <button class="p-2 bg-white rounded-full shadow-md hover:text-indigo-600 transition-colors">
+                        <button class="btn p-2 bg-white rounded-full shadow-md hover:text-indigo-600 transition-colors">
                             <i class="far fa-heart"></i>
                         </button>
                     </div>
@@ -204,10 +204,10 @@ $AllCourses=$cours->getAllCourses();
                 <div class="p-6">
                     <div class="flex items-center mb-3">
                         <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">
-                            Développement Web
+                            Youcode
                         </span>
                         <span class="ml-2 px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
-                            Débutant
+                        Simplon
                         </span>
                     </div>
                     <h3 class="text-xl font-semibold mb-2"><?php echo $course['titre']; ?></h3>
@@ -233,9 +233,9 @@ $AllCourses=$cours->getAllCourses();
                             </div>
                         </div>
                     </div>
-                    <a href="course-details.php?id=<?php echo $course['course_id']; ?>" 
+                    <a href="../public/login.php" 
                         class="gradient-border block card-hover">
-                        <div class="px-6 py-2 text-center text-indigo-600">
+                        <div class="btn px-6 py-2 text-center text-indigo-600">
                             Voir le cours
                         </div>
                     </a>
@@ -261,5 +261,6 @@ $AllCourses=$cours->getAllCourses();
             </nav>
         </div>
     </div>
+<script src="../assets/js/script.js"></script>
 </body>
 </html>

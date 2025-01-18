@@ -1,10 +1,12 @@
 <aside id="sidebar" class="transform lg:transform-none lg:opacity-100 lg:relative fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transition-all duration-300 ease-in-out translate-x-[-100%] lg:translate-x-0">
             <div class="p-6 hidden lg:block">
-                <div class="flex items-center space-x-3">
-                    
-                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        Youdemy
-                    </h1>
+            <div class="flex items-center justify-center">
+                    <div class="gradient-border">
+                        <div class="w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-2xl gradient-text"></i>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text ml-3">Youdemy</span>
                 </div>
             </div>
             

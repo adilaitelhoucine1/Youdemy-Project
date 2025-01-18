@@ -159,12 +159,13 @@ $AllEnseignants=$Enseignant->showallEnseignants();
                     <?php foreach($AllEnseignants as $teacher) {?>
                     <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
                     <div class="relative">
-                        <img src="../assets/images/professeur.png" alt="Teacher" class="w-full h-48 object-cover rounded-t-xl shadow-lg">
+                        <img src="../assets/images/professeur.png" alt="Teacher" class="w-full h-64 object-cover rounded-t-xl shadow-lg">
                         <div class="absolute top-4 right-4 flex space-x-2">
-                            <a href="#" class="p-2 bg-white rounded-full shadow-md hover:text-indigo-600 hover:shadow-lg transition-all duration-300 social-icon">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="p-2 bg-white rounded-full shadow-md hover:text-indigo-600 hover:shadow-lg transition-all duration-300 social-icon">
+                        <a href="https://www.linkedin.com/in/adil-ait-el-houcine-69352429b/" class="p-2 bg-white rounded-full shadow-md hover:text-indigo-600 hover:shadow-lg transition-all duration-300 social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                            <a href="https://www.linkedin.com/in/adil-ait-el-houcine-69352429b/" class="p-2 bg-white rounded-full shadow-md hover:text-indigo-600 hover:shadow-lg transition-all duration-300 social-icon">
                                 <i class="fab fa-twitter"></i>
                             </a>
             </div>
@@ -194,7 +195,7 @@ $AllEnseignants=$Enseignant->showallEnseignants();
                     </div>
                 </div>
                 <div class="px-6 pb-6">
-                    <a href="teacher-profile.php?id=1" class="gradient-border block card-hover">
+                    <a href="../public/login.php" class="gradient-border block card-hover">
                         <div class="px-6 py-2 text-center text-indigo-600">
                             Voir le profil
                         </div>
@@ -205,7 +206,7 @@ $AllEnseignants=$Enseignant->showallEnseignants();
         </div>
     </div>
 
-    <!-- Section statistiques -->
+  
     <div class="bg-indigo-50 py-16">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
@@ -229,7 +230,7 @@ $AllEnseignants=$Enseignant->showallEnseignants();
         </div>
     </div>
 
-    <!-- Call to Action -->
+
     <div class="bg-white py-16">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">Vous souhaitez devenir enseignant ?</h2>
@@ -243,5 +244,6 @@ $AllEnseignants=$Enseignant->showallEnseignants();
             </a>
         </div>
     </div>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html> 

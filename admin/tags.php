@@ -30,6 +30,18 @@ $Tags=$Tag->afficher_tag();
             }
         }
     </script>
+
+<style>
+          body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #0EA5E9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Mobile Menu Button -->
