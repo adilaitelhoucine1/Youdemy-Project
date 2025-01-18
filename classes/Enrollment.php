@@ -37,7 +37,11 @@ class Enrollment {
         $stmt->execute([$user_id]);
         return $stmt->fetchAll();
     }
-    
+    public function DeleteMyCourse($course_id,$user_id){
+    $sql="DELETE from enrollment where id_etudiant = ? and id_cours = ?";
+    $stmt=$this->conn->prepare($sql);
+    $stmt->execute([$user_id,$course_id]);
+    }
   
 }
 

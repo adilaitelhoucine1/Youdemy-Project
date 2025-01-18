@@ -18,7 +18,7 @@ $url=$cours->getVideoUrl($course_id);
 // echo "<br>";
 // echo $url;
 // echo "<br>";
- print_r($details);
+//  print_r($details);
 foreach($details as $cours){
     $course_id=$cours['course_id'];
     $title=$cours['titre'];
