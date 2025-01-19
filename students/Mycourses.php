@@ -126,7 +126,7 @@ $Enseignant = new Enseignant();
                             <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-48 object-cover">
                             <div class="absolute top-4 right-4">
                         
-                            <a href="DeleteMyCourse.php?id_course=<?php echo $cours['course_id'] ?>" class="p-2 bg-pink-500 rounded-full shadow-md hover:bg-white transition-colors">
+                            <a href="DeleteMyCourse.php?id_course=<?php echo $cours['course_id'] ?>" class="p-2 bg-white	 rounded-full shadow-md hover:bg-cyan-400 transition-colors">
                                     <i class="fas fa-heart heart-icon"></i>
                             </a>
 

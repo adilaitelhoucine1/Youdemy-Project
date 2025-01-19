@@ -3,6 +3,7 @@
 
     class Cours {
         protected $conn;
+        private $coursPerPage = 3;
         
         public function __construct() {
             $connect = new Connect();
@@ -159,6 +160,20 @@
             return $stmt->fetchAll();
         }
 
+        public function getCoursesPaginated($page) {
+            $debut = ($page - 1) * 3;  
+            $sql = "SELECT c.*, u.nom FROM cours c 
+                    JOIN utilisateur u ON c.enseignant_id = u.user_id 
+                    LIMIT $debut, 3";            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+    
+        public function getNombrePages() {
+            $stmt = $this->conn->query("SELECT COUNT(*) FROM cours");
+            return ceil($stmt->fetchColumn() / 3);
+        }
     } 
     //    $cours = new Cours();
     //    print_r( $cours->afficher(16));

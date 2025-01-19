@@ -6,9 +6,11 @@ require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
 
-$cours= new Cours();
-$AllCourses=$cours->getAllCourses();
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$cours = new Cours();
+$AllCourses = $cours->getCoursesPaginated($page);
 
+$pages = $cours->getNombrePages();
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +70,6 @@ $AllCourses=$cours->getAllCourses();
 <nav class="fixed w-full z-50 nav-blur">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <div class="flex items-center space-x-4">
                     <div class="gradient-border">
                         <div class="w-12 h-12 flex items-center justify-center">
@@ -78,7 +79,6 @@ $AllCourses=$cours->getAllCourses();
                     <span class="text-2xl font-bold gradient-text">Youdemy</span>
                 </div>
 
-                <!-- Navigation Links - Desktop -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.php" class="group relative py-2">
                         <span class="text-gray-700 group-hover:text-indigo-600 transition-colors">Accueil</span>
@@ -98,7 +98,7 @@ $AllCourses=$cours->getAllCourses();
                     </a>
                 </div>
 
-                <!-- Auth Buttons -->
+             
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="../public/login.php" class="px-6 py-2 text-gray-700 hover:text-indigo-600 transition-colors">
                         Connexion
@@ -110,14 +110,14 @@ $AllCourses=$cours->getAllCourses();
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
+           
                 <button class="md:hidden text-gray-700" id="mobile-menu-button">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
+  
         <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
             <div class="px-4 py-3 space-y-3">
                 <a href="#" class="block text-gray-700 hover:text-indigo-600 transition-colors">Cours</a>
@@ -152,15 +152,16 @@ $AllCourses=$cours->getAllCourses();
                 <!-- Barre de recherche -->
                 <div class="w-full md:w-96">
                     <div class="relative">
-                        <input type="text" placeholder="Rechercher un cours..." 
-                            class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <input type="text" 
+                               id="searchInput"
+                               placeholder="Rechercher un cours..." 
+                               class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         <button class="absolute right-3 top-3 text-gray-400 hover:text-indigo-600 transition-colors">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Filtres -->
                 <div class="flex flex-wrap gap-4">
                     <select class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white">
                         <option value="">Catégorie</option>
@@ -190,9 +191,9 @@ $AllCourses=$cours->getAllCourses();
 
     <!-- Liste des cours -->
     <div class="max-w-7xl mx-auto px-4 pb-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="coursContainer">
             <?php foreach($AllCourses as $course) {?>
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+            <div class="course-card bg-white rounded-xl shadow-md overflow-hidden card-hover">
                 <div class="relative">
                     <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-48 object-cover">
                     <div class="absolute top-4 right-4">
@@ -210,14 +211,14 @@ $AllCourses=$cours->getAllCourses();
                         Simplon
                         </span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2"><?php echo $course['titre']; ?></h3>
-                    <p class="text-gray-600 mb-4 line-clamp-2">
+                    <h3 class="text-xl font-semibold mb-2 course-title"><?php echo $course['titre']; ?></h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2 course-description">
                     <?php echo $course['description']; ?></p>
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <img src="../assets/images/professeur.png" alt="Instructor" class="w-10 h-10 rounded-full border-2 border-indigo-600">
                             <div class="ml-3">
-                                <span class="block text-sm font-medium text-gray-900 capitalize"><?php echo $course['nom']; ?></span>
+                                <span class="course-Enseignant block text-sm font-medium text-gray-900 capitalize"><?php echo $course['nom']; ?></span>
                                 <span class="block text-xs text-gray-500">Expert Web</span>
                             </div>
                         </div>
@@ -244,23 +245,34 @@ $AllCourses=$cours->getAllCourses();
             <?php }; ?>
         </div>
 
-        <!-- Pagination -->
-        <div class="mt-12 flex justify-center">
-            <nav class="flex items-center space-x-2">
-                <a href="#" class="gradient-border inline-block">
-                    <div class="px-4 py-2 text-indigo-600">Précédent</div>
+        <div class="flex justify-center gap-2 mt-8">
+            <?php for($i = 1; $i <= $pages; $i++): ?>
+                <a href="?page=<?= $i ?>" 
+                   class="px-3 py-1 <?= $i == $page ? 'bg-indigo-600 text-white' : 'bg-gray-100' ?> rounded">
+                    <?= $i ?>
                 </a>
-                <a href="#" class="px-3 py-2 rounded-lg bg-indigo-600 text-white">1</a>
-                <a href="#" class="px-3 py-2 rounded-lg border hover:border-indigo-600 hover:text-indigo-600 transition-colors">2</a>
-                <a href="#" class="px-3 py-2 rounded-lg border hover:border-indigo-600 hover:text-indigo-600 transition-colors">3</a>
-                <span class="px-3 py-2">...</span>
-                <a href="#" class="px-3 py-2 rounded-lg border hover:border-indigo-600 hover:text-indigo-600 transition-colors">10</a>
-                <a href="#" class="gradient-border inline-block">
-                    <div class="px-4 py-2 text-indigo-600">Suivant</div>
-                </a>
-            </nav>
+            <?php endfor; ?>
         </div>
     </div>
-<script src="../assets/js/script.js"></script>
+
+    <script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+         const searchTerm = this.value.toLowerCase();
+        const courseCards = document.getElementsByClassName('course-card');
+        console.log(courseCards);
+        
+        Array.from(courseCards).forEach(card => {
+            const title = card.querySelector('.course-title').textContent.toLowerCase();
+            const description = card.querySelector('.course-description').textContent.toLowerCase();
+            const Enseignant = card.querySelector('.course-Enseignant').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || description.includes(searchTerm) ||  Enseignant.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+    </script>
 </body>
 </html>
