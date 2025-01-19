@@ -99,7 +99,7 @@ $Enseignant = new Enseignant();
                 <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
                     <div class="flex flex-col md:flex-row gap-4 justify-between">
                         <div class="relative flex-1">
-                            <input type="text" placeholder="Rechercher dans mes cours..." 
+                            <input type="text" placeholder="Rechercher dans mes cours..." id="searchInput" 
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
                             <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
                         </div>
@@ -119,9 +119,11 @@ $Enseignant = new Enseignant();
                 </div>
 
              
+
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                <?php foreach($Mycourses as $cours){ ?>
-                    <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                    <div class="course-card bg-white rounded-xl shadow-sm overflow-hidden card-hover">
                         <div class="relative">
                             <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-48 object-cover">
                             <div class="absolute top-4 right-4">
@@ -135,7 +137,7 @@ $Enseignant = new Enseignant();
                             </div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2"><?php echo $cours['titre'] ?></h3>
+                            <h3 class="course-title text-xl font-semibold mb-2"><?php echo $cours['titre'] ?></h3>
                             <p class="text-gray-600 mb-4"><?php echo $cours['description'] ?></p>
                             <div class="flex items-center">
                                 <img src="../assets/images/professeur.png" alt="Instructor" class="w-10 h-10 rounded-full">
@@ -157,5 +159,25 @@ $Enseignant = new Enseignant();
             </div>
         </div>
     </div>
+
+    <script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+         const searchTerm = this.value.toLowerCase();
+        const courseCards = document.getElementsByClassName('course-card');
+        console.log(courseCards);
+        
+        Array.from(courseCards).forEach(card => {
+            const title = card.querySelector('.course-title').textContent.toLowerCase();
+
+            
+            if (title.includes(searchTerm) ) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+    </script>
+
 </body>
 </html>

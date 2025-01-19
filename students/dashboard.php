@@ -124,14 +124,28 @@ $AllCourses=$cours->getAllCourses();
                     </div>
                 </div>
 
+
+
+                <div class="w-full md:w-96">
+                    <div class="relative">
+                        <input type="text" 
+                               id="searchInput"
+                               placeholder="Rechercher un cours..." 
+                               class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <button class="absolute right-3 top-3 text-gray-400 hover:text-indigo-600 transition-colors">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h2 class="text-xl font-semibold mb-6">Les cours disponibles</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <?php  foreach($AllCourses as $course){ ?>
-                        <div class="border rounded-lg overflow-hidden card-hover">
+                        <div class="course-card border rounded-lg overflow-hidden card-hover">
                             <img src="../assets/images/cours_bg.jpeg" alt="Course" class="w-full h-40 object-cover">
                             <div class="p-4">
-                                <h3 class="font-semibold mb-2"><?php echo $course['titre']; ?></h3>
+                                <h3 class="course-title font-semibold mb-2"><?php echo $course['titre']; ?></h3>
                                 <div class="flex justify-between items-center">
                                     <div class="text-sm text-gray-500">
                                         
@@ -155,5 +169,24 @@ $AllCourses=$cours->getAllCourses();
             </div>
         </div>
     </div>
+
+
+    <script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+         const searchTerm = this.value.toLowerCase();
+        const courseCards = document.getElementsByClassName('course-card');
+        console.log(courseCards);
+        
+        Array.from(courseCards).forEach(card => {
+            const title = card.querySelector('.course-title').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+    </script>
 </body>
 </html> 
