@@ -6,6 +6,9 @@ require_once '../classes/CoursVideo.php';
 require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 $enseignant_id=$_SESSION['user_id'];
+if($_SESSION['role'] != "Enseignant"){
+    header("location: ../public/404.php");
+}
 
 $Enseignant = new Enseignant();
 $Subscriptions=$Enseignant->getMySuscriptions($enseignant_id);
@@ -54,10 +57,7 @@ $Subscriptions=$Enseignant->getMySuscriptions($enseignant_id);
                         <i class="fas fa-users"></i>
                         <span>Étudiants</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Statistiques</span>
-                    </a>
+            
                     <a href="../public/deonnexion.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Déconnexion</span>

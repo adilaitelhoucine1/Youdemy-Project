@@ -3,7 +3,7 @@ require_once '../classes/Tags.php';
 require_once '../classes/Administrateur.php';
 
 if(!($_SESSION['role']==="admin")){
-    header("location: ../public/login.php");
+    header("location: ../public/404.php");
 }
 $Tag=new Tags();
 

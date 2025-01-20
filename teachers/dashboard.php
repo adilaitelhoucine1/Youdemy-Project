@@ -6,6 +6,17 @@ require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
 $enseignant_id=$_SESSION['user_id'];
 $cours = new Cours();
+$Enseignant = new Enseignant();
+
+
+if(!($_SESSION['role'] === "Enseignant")){
+    header("location: ../public/404.php");
+}
+
+if ($Enseignant->CheckActifEnseignant($enseignant_id)==0) {
+    header('Location: ../public/waiting.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,10 +63,7 @@ $cours = new Cours();
                         <i class="fas fa-users"></i>
                         <span>Étudiants</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Statistiques</span>
-                    </a>
+          
                     <a href="../public/deonnexion.php" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
                     <i class="fas fa-sign-out-alt"></i>
                         <span>Déconnexion</span>
@@ -76,7 +84,7 @@ $cours = new Cours();
                 </div>
             </header>
 
-            <div class="grid grid-cols- md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols- md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
              
                 <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
                     <div class="flex justify-between items-start">
@@ -84,10 +92,7 @@ $cours = new Cours();
                             <p class="text-gray-500 text-sm">Total des cours</p>
                             <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCourses($enseignant_id);  ?></h3>
                           
-                            <p class="text-green-500 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i>
-                                <span>12% ce mois</span>
-                            </p>
+                         
                         </div>
                         <div class="bg-blue-100 p-3 rounded-lg">
                             <i class="fas fa-book-open text-blue-600 text-xl"></i>
@@ -101,10 +106,7 @@ $cours = new Cours();
                         <div>
                             <p class="text-gray-500 text-sm">Cours Vidéo</p>
                             <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCoursVideo($enseignant_id);  ?></h3>
-                            <p class="text-green-500 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i>
-                                <span>8% ce mois</span>
-                            </p>
+                    
                         </div>
                         <div class="bg-purple-100 p-3 rounded-lg">
                             <i class="fas fa-video text-purple-600 text-xl"></i>
@@ -118,13 +120,22 @@ $cours = new Cours();
                         <div>
                             <p class="text-gray-500 text-sm">Cours Texte</p>
                             <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $cours->getCountCoursText($enseignant_id);  ?></h3>
-                            <p class="text-green-500 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i>
-                                <span>5% ce mois</span>
-                            </p>
+                   
                         </div>
                         <div class="bg-green-100 p-3 rounded-lg">
                             <i class="fas fa-file-alt text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-500 text-sm">Nombre des inscriptions</p>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-2"><?php echo $Enseignant->getNombreinscrits($enseignant_id);  ?></h3>
+              
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                        <i class="fas fa-user-plus mr-1"></i>
                         </div>
                     </div>
                 </div>
@@ -132,74 +143,76 @@ $cours = new Cours();
                
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Cours Récents</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
-                            <div class="bg-purple-100 p-3 rounded-lg mr-4">
-                                <i class="fas fa-video text-purple-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-sm font-semibold text-gray-800">Introduction à PHP</h4>
-                                <p class="text-sm text-gray-500">Ajouté il y a 2 heures</p>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Actif</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
-                            <div class="bg-green-100 p-3 rounded-lg mr-4">
-                                <i class="fas fa-file-alt text-green-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-sm font-semibold text-gray-800">JavaScript Avancé</h4>
-                                <p class="text-sm text-gray-500">Ajouté il y a 5 heures</p>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Actif</span>
-                            </div>
-                        </div>
+           
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto px-4 mt-8">
+        <!-- Ressources pour les enseignants -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Ressources Pédagogiques</h3>
+            <div class="space-y-4">
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                    <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                        <i class="fas fa-book text-purple-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-semibold text-gray-800">Guide de l'enseignant</h4>
+                        <p class="text-sm text-gray-500">Meilleures pratiques d'enseignement</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">Gratuit</span>
                     </div>
                 </div>
 
-                 <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Activités Récentes</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-blue-100 p-3 rounded-full">
-                                <i class="fas fa-user-graduate text-blue-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-800">5 nouveaux étudiants inscrits</p>
-                                <p class="text-sm text-gray-500">Il y a 2 heures</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-yellow-100 p-3 rounded-full">
-                                <i class="fas fa-star text-yellow-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-800">Nouvelle évaluation 5 étoiles</p>
-                                <p class="text-sm text-gray-500">Il y a 4 heures</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-green-100 p-3 rounded-full">
-                                <i class="fas fa-comment text-green-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-800">Nouveau commentaire reçu</p>
-                                <p class="text-sm text-gray-500">Il y a 6 heures</p>
-                            </div>
-                        </div>
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                    <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                        <i class="fas fa-video text-blue-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-semibold text-gray-800">Tutoriels vidéo</h4>
+                        <p class="text-sm text-gray-500">Création de contenu pédagogique</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Premium</span>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Conseils et astuces -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Conseils pour réussir</h3>
+            <div class="space-y-4">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-lightbulb text-green-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-gray-800">Créez un environnement d'apprentissage positif</p>
+                        <p class="text-sm text-gray-500">Conseils pour motiver vos étudiants</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <i class="fas fa-clock text-yellow-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-gray-800">Gérez votre temps efficacement</p>
+                        <p class="text-sm text-gray-500">Techniques de gestion du temps</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fas fa-heart text-red-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-gray-800">Restez passionné</p>
+                        <p class="text-sm text-gray-500">Maintenez votre motivation intacte</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         </main>
     </div>
 </body>

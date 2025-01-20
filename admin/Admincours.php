@@ -5,7 +5,9 @@ require_once '../classes/Administrateur.php';
 require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
-
+if(!($_SESSION['role']==="admin")){
+    header("location: ../public/404.php");
+}
 $cours= new Cours();
 $AllCourses=$cours->getAllCourses();
 

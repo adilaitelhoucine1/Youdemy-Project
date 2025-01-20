@@ -159,6 +159,7 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+   
 
         public function getCoursesPaginated($page) {
             $debut = ($page - 1) * 3;  

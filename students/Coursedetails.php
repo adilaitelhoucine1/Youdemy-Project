@@ -5,6 +5,10 @@ require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
 
+if(!($_SESSION['role'] === "Étudiant")){
+    header("location: ../public/404.php");
+}
+
 $course_id= $_POST['Course_id'];
 $cours= new Cours();
 $details=$cours->afficher($course_id);

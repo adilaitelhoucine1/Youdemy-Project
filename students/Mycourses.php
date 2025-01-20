@@ -3,7 +3,9 @@
 require_once '../classes/Cours.php';
 require_once '../classes/Enrollment.php';
 require_once '../classes/Enseignant.php';
-
+if(!($_SESSION['role'] === "Étudiant")){
+    header("location: ../public/404.php");
+}
 $user_id= $_SESSION['user_id'];
 $Enrollment = new Enrollment();
 $Mycourses=$Enrollment->getMyCourses($user_id);

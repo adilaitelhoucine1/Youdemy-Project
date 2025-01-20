@@ -55,6 +55,16 @@ class Enseignant extends Utilisateur {
       $stmt->execute([$Enseignant_id]);
       return $stmt->fetchAll();
     }
+
+    public function getNombreinscrits($Enseignant_id) {
+        $sql = "SELECT COUNT(cr.enseignant_id) as 'total' FROM enrollment en 
+        join cours cr on en.id_cours = cr.course_id 
+        JOIN utilisateur u ON cr.enseignant_id=u.user_id WHERE cr.enseignant_id=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$Enseignant_id]);
+        $result= $stmt->fetch();
+        return $result['total'];
+    }
 } 
 
 

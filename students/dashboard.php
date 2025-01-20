@@ -6,6 +6,10 @@ require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
 
+if(!($_SESSION['role'] === "Étudiant")){
+    header("location: ../public/404.php");
+}
+
 $cours= new Cours();
 $AllCourses=$cours->getAllCourses();
 
@@ -91,40 +95,7 @@ $AllCourses=$cours->getAllCourses();
             </div>
 
             <div class="max-w-7xl mx-auto px-4 py-8">
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-xl shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold">Cours en cours</h3>
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-book-open text-2xl text-indigo-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-3xl font-bold">5</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold">Cours terminés</h3>
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-check-circle text-2xl text-green-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-3xl font-bold">3</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold">Certificats</h3>
-                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-certificate text-2xl text-yellow-600"></i>
-                            </div>
-                        </div>
-                        <p class="text-3xl font-bold">2</p>
-                    </div>
-                </div>
-
-
+                
 
                 <div class="w-full md:w-96">
                     <div class="relative">

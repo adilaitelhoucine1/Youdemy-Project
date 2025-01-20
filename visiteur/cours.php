@@ -255,6 +255,7 @@ $pages = $cours->getNombrePages();
         </div>
     </div>
 
+
     <script>
     document.getElementById('searchInput').addEventListener('keyup', function() {
          const searchTerm = this.value.toLowerCase();

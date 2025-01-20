@@ -10,7 +10,7 @@ $Enseignant = new Enseignant();
 $Categorie = new Categorie();
 
 if(!($_SESSION['role']==="admin")){
-    header("location: ../public/login.php");
+    header("location: ../public/404.php");
 }
 
 ?>

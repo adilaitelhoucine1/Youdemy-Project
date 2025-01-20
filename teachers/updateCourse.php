@@ -6,6 +6,10 @@ require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
 
+if($_SESSION['role'] != "Enseignant"){
+    header("location: ../public/login.php");
+}
+
 $course_id = $_POST['course_id'];
 // $type = $_POST['type'];
 
@@ -90,10 +94,7 @@ $category_id = $cours->getCategoryId($course_id);
                         <i class="fas fa-users"></i>
                         <span>Étudiants</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 p-3 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Statistiques</span>
-                    </a>
+             
                 </nav>
             </div>
         </aside>
