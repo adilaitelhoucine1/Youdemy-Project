@@ -8,7 +8,12 @@ $Administrateur = new Administrateur();
 $user = new Utilisateur();
 $Enseignant = new Enseignant();
 $Categorie = new Categorie();
+ 
+$CatByCount=$cours->getcategorybyCrCount();
+$MostCourse=$cours->GetMostCours();
+$topEnseignants=$cours->getMostEnseignat();
 
+// print_r($CatByCount);
 if(!($_SESSION['role']==="admin")){
     header("location: ../public/404.php");
 }
@@ -167,62 +172,60 @@ if(!($_SESSION['role']==="admin")){
 
              
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                
-                
-                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800">Évolution des Inscriptions</h3>
-                            <select class="text-sm border rounded-lg px-2 py-1">
-                                <option>7 derniers jours</option>
-                                <option>30 derniers jours</option>
-                                <option>Cette année</option>
-                            </select>
-                        </div>
-                        <div class="h-80">
-                            <canvas id="enrollmentChart"></canvas>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <!-- Statistiques par catégorie -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-chart-pie mr-2 text-indigo-600"></i>
+                            Top Catégories
+                        </h3>
+                        <div class="space-y-4">
+                            <?php foreach($CatByCount as $Cat){ ?>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <span class="font-medium"><?php echo $Cat['name'] ?></span>
+                                <span class="text-indigo-600 font-bold"><?php echo $Cat['total'] ?> cours</span>
+                            </div>
+                           <?php } ?>  
                         </div>
                     </div>
 
-                  
-                    
-                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800">Répartition des Cours</h3>
-                            <button class="text-primary hover:text-primary/80 text-sm">
-                                <i class="fas fa-download mr-1"></i> Exporter
-                            </button>
+                    <!-- Cours populaire -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-trophy mr-2 text-yellow-500"></i>
+                            Cours le plus populaire
+                        </h3>
+                      <?php foreach($MostCourse as $cours) ?>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2"><?php echo $cours['titre'] ?></h4>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600"><?php echo $cours['total'] ?> étudiants</span>
+                              
+                            </div>
                         </div>
-                        <div class="h-80">
-                            <canvas id="categoryPieChart"></canvas>
-                        </div>
+                       
                     </div>
                 </div>
 
                 
                 
-                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg font-semibold text-gray-800">Top 3 Enseignants</h3>
-                        <button class="text-primary hover:text-primary/80">Voir tous les enseignants</button>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                     
-                    
-                        <div class="bg-gray-50 rounded-xl p-6 text-center">
-                            <img src="https://via.placeholder.com/80" alt="Teacher" class="w-20 h-20 rounded-full mx-auto mb-4">
-                            <h4 class="font-semibold text-gray-800">Marie Dubois</h4>
-                            <p class="text-sm text-gray-500 mb-2">Développement Web</p>
-                            <div class="flex justify-center items-center space-x-2">
-                                <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                                    245 étudiants
-                                </span>
-                                <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
-                                    4.9 ★
-                                </span>
-                            </div>
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-medal mr-2 text-indigo-600"></i>
+                        Meilleurs Enseignants
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <?php foreach ($topEnseignants as $teacher) { ?>
+                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 p-6 rounded-lg shadow-lg text-center text-white hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center justify-center mb-4">
+                            <span class="text-4xl mr-2">👩‍🏫</span>
+                            <h4 class="text-2xl font-bold capitalize"><?php echo $teacher['nom']; ?></h4>
                         </div>
-                        
+                        <p class="text-lg font-medium"><?php echo $teacher['total']; ?> étudiants</p>
+                    </div>
+                <?php } ?>
+
+
                     </div>
                 </div>
             </main>

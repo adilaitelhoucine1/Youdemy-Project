@@ -106,4 +106,17 @@ class Utilisateur {
         return $result['count'];
     }
 
+    public function CheckUserstatus($Enseignant_id) {
+        $sql = "SELECT status FROM utilisateur where user_id = ?";
+        $stmt =  $this->conn->prepare($sql);
+        $stmt->execute([$Enseignant_id]);
+        $result =$stmt->fetch();
+        return $result['status'];
+    }
 }
+$user = new Utilisateur();
+ $user->CheckUserstatus(113);
+
+
+
+?>

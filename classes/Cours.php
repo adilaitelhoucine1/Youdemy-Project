@@ -175,6 +175,32 @@
             $stmt = $this->conn->query("SELECT COUNT(*) FROM cours");
             return ceil($stmt->fetchColumn() / 3);
         }
+        public function getcategorybyCrCount(){
+            $sql="SELECT ca.name,COUNT(c.id_category)  as 'total' FROM cours c JOIN categorie ca 
+            ON c.id_category= ca.id_category GROUP BY c.id_category ";
+            $stmt=$this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        public function GetMostCours(){
+            $sql="SELECT COUNT(en.id_etudiant) as 'total', cr.titre FROM enrollment en 
+             JOIN cours cr ON en.id_cours=cr.course_id  GROUP  by en.id_etudiant 
+             ORDER by en.id_etudiant DESC LIMIT 1";
+             $stmt=$this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+
+        }
+        public function getMostEnseignat(){
+            $sql="SELECT COUNT(en.id_etudiant) as 'total',u.* FROM enrollment en 
+             JOIN cours cr ON en.id_cours=cr.course_id JOIN utilisateur u ON u.user_id=cr.enseignant_id
+             GROUP  by u.user_id
+             ORDER by 'total' LIMIT 3";
+             $stmt=$this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+            
+        }
     } 
     //    $cours = new Cours();
     //    print_r( $cours->afficher(16));

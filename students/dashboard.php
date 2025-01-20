@@ -11,7 +11,15 @@ if(!($_SESSION['role'] === "Étudiant")){
 }
 
 $cours= new Cours();
+
+$user = new Utilisateur();
+if(!($user->CheckUserstatus( $_SESSION['user_id'])=='Active')){
+    header("location: ../public/waiting.php");
+}
+
+
 $AllCourses=$cours->getAllCourses();
+
 
 
 ?>
