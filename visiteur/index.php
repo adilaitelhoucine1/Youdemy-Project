@@ -107,9 +107,9 @@
 
         <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
             <div class="px-4 py-3 space-y-3">
-                <a href="#" class="block text-gray-700 hover:text-indigo-600 transition-colors">Cours</a>
-                <a href="#" class="block text-gray-700 hover:text-indigo-600 transition-colors">Catégories</a>
-                <a href="#" class="block text-gray-700 hover:text-indigo-600 transition-colors">Enseignants</a>
+                <a href="cours.php" class="block text-gray-700 hover:text-indigo-600 transition-colors">Cours</a>
+                <a href="categories.php" class="block text-gray-700 hover:text-indigo-600 transition-colors">Catégories</a>
+                <a href="Enseignants.php" class="block text-gray-700 hover:text-indigo-600 transition-colors">Enseignants</a>
                 <div class="pt-4 border-t">
                     <a href="../public/login.php" class="block text-gray-700 hover:text-indigo-600 transition-colors">Connexion</a>
                     <a href="../public/register.php" class="block mt-3 text-center bg-indigo-600 text-white px-4 py-2 rounded-lg">
@@ -123,7 +123,6 @@
     <div class="hero-pattern min-h-screen pt-20">
         <div class="max-w-7xl mx-auto px-4 py-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Text Content -->
                 <div class="text-center md:text-left">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
                         <span class="gradient-text">Apprenez</span> pour 

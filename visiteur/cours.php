@@ -250,23 +250,35 @@ $pages = $cours->getNombrePages($search);
 
 
     <script>
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-         const searchTerm = this.value.toLowerCase();
-        const courseCards = document.getElementsByClassName('course-card');
-        console.log(courseCards);
+
         
-        Array.from(courseCards).forEach(card => {
-            const title = card.querySelector('.course-title').textContent.toLowerCase();
-            const description = card.querySelector('.course-description').textContent.toLowerCase();
-            const Enseignant = card.querySelector('.course-Enseignant').textContent.toLowerCase();
-            
-            if (title.includes(searchTerm) || description.includes(searchTerm) ||  Enseignant.includes(searchTerm)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
+   
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
     });
+    
+    // document.getElementById('searchInput').addEventListener('keyup', function() {
+    //      const searchTerm = this.value.toLowerCase();
+    //     const courseCards = document.getElementsByClassName('course-card');
+    //     console.log(courseCards);
+        
+    //     Array.from(courseCards).forEach(card => {
+    //         const title = card.querySelector('.course-title').textContent.toLowerCase();
+    //         const description = card.querySelector('.course-description').textContent.toLowerCase();
+    //         const Enseignant = card.querySelector('.course-Enseignant').textContent.toLowerCase();
+            
+    //         if (title.includes(searchTerm) || description.includes(searchTerm) ||  Enseignant.includes(searchTerm)) {
+    //             card.style.display = '';
+    //         } else {
+    //             card.style.display = 'none';
+    //         }
+    //     });
+    // });
     </script>
 </body>
 </html>

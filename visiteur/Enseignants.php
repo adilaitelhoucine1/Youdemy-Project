@@ -244,6 +244,17 @@ $AllEnseignants=$Enseignant->showallEnseignants();
             </a>
         </div>
     </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+    </script>
     <script src="../assets/js/script.js"></script>
 </body>
 </html> 
