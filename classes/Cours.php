@@ -171,10 +171,10 @@
             return $stmt->fetchAll();
         }
     
-        public function getNombrePages() {
-            $stmt = $this->conn->query("SELECT COUNT(*) FROM cours");
-            return ceil($stmt->fetchColumn() / 3);
-        }
+        // public function getNombrePages() {
+        //     $stmt = $this->conn->query("SELECT COUNT(*) FROM cours");
+        //     return ceil($stmt->fetchColumn() / 3);
+        // }
         public function getcategorybyCrCount(){
             $sql="SELECT ca.name,COUNT(c.id_category)  as 'total' FROM cours c JOIN categorie ca 
             ON c.id_category= ca.id_category GROUP BY c.id_category ";
@@ -200,6 +200,44 @@
             $stmt->execute();
             return $stmt->fetchAll();
             
+        }
+
+        public function searchCourses($search, $page = 1) {
+            $debut = ($page - 1) * 3;
+            $query = "SELECT c.*, u.nom FROM cours c 
+                     JOIN utilisateur u ON c.enseignant_id = u.user_id";
+            
+            if (!empty($search)) {
+                $query .= " WHERE c.titre LIKE ? OR c.description LIKE ?";
+            }
+            
+            $query .= " LIMIT $debut, 3";
+            $stmt = $this->conn->prepare($query);
+            
+            if (!empty($search)) {
+                $searchTerm = "%$search%";
+                $stmt->execute([$searchTerm, $searchTerm]);
+            } else {
+                $stmt->execute();
+            }
+            
+            return $stmt->fetchAll();
+        }
+
+        public function getNombrePages($search) {
+            $query = "SELECT COUNT(*) FROM cours";
+            
+            if (!empty($search)) {
+                $query .= " WHERE titre LIKE ? OR description LIKE ?";
+            }        
+            $stmt = $this->conn->prepare($query);        
+            if (!empty($search)) {
+                $searchTerm = "%$search%";
+                $stmt->execute([$searchTerm, $searchTerm]);
+            } else {
+                $stmt->execute();
+            }       
+            return ceil($stmt->fetchColumn() / 3);
         }
     } 
     //    $cours = new Cours();

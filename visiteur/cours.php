@@ -6,11 +6,12 @@ require_once '../classes/Categorie.php';
 require_once '../classes/Tags.php';
 require_once '../classes/Cours.php';
 
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$cours = new Cours();
-$AllCourses = $cours->getCoursesPaginated($page);
 
-$pages = $cours->getNombrePages();
+$cours = new Cours();
+$AllCourses = $cours->searchCourses($search, $page);
+$pages = $cours->getNombrePages($search);
 
 ?>
 <!DOCTYPE html>
@@ -149,17 +150,17 @@ $pages = $cours->getNombrePages();
     <div class="max-w-7xl mx-auto -mt-8 px-4">
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
-                <!-- Barre de recherche -->
                 <div class="w-full md:w-96">
-                    <div class="relative">
+                    <form method="GET" action="" class="relative">
                         <input type="text" 
-                               id="searchInput"
+                               name="search"
+                               value="<?= htmlspecialchars($search) ?>"
                                placeholder="Rechercher un cours..." 
                                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        <button class="absolute right-3 top-3 text-gray-400 hover:text-indigo-600 transition-colors">
+                        <button type="submit" class="absolute right-3 top-3 text-gray-400 hover:text-indigo-600 transition-colors">
                             <i class="fas fa-search"></i>
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 <div class="flex flex-wrap gap-4">
@@ -189,7 +190,6 @@ $pages = $cours->getNombrePages();
         </div>
     </div>
 
-    <!-- Liste des cours -->
     <div class="max-w-7xl mx-auto px-4 pb-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="coursContainer">
             <?php foreach($AllCourses as $course) {?>
@@ -224,14 +224,7 @@ $pages = $cours->getNombrePages();
                         </div>
                         <div class="text-right">
                             <span class="block text-lg font-bold gradient-text">Free</span>
-                            <div class="flex items-center text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ml-1 text-gray-500">(4.5)</span>
-                            </div>
+                            
                         </div>
                     </div>
                     <a href="../public/login.php" 
@@ -247,7 +240,7 @@ $pages = $cours->getNombrePages();
 
         <div class="flex justify-center gap-2 mt-8">
             <?php for($i = 1; $i <= $pages; $i++): ?>
-                <a href="?page=<?= $i ?>" 
+                <a href="?page=<?= $i ?>&search=<?= htmlspecialchars($search) ?>" 
                    class="px-3 py-1 <?= $i == $page ? 'bg-indigo-600 text-white' : 'bg-gray-100' ?> rounded">
                     <?= $i ?>
                 </a>
